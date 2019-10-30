@@ -135,7 +135,7 @@ steps:
     username: 
       from_secret: registry_user
     password: 
-      from_secret: registry_password
+      from_secret: registry_password 
     build_args:
       VUE_APP_API: http://localhost:3001
   when:
