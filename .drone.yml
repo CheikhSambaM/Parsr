@@ -18,14 +18,16 @@ steps:
 - name: Build Docker baseimage
   image: plugins/docker
   settings:
-    repo: axarev/parsr-base
     context: .
     dockerfile: docker/parsr-base/Dockerfile
     username: 
       from_secret: registry_user
     password: 
       from_secret: registry_password
-
+    repo: 
+      from_secret: repo_base
+    registry: 
+      from_secret: registry
 ---
 kind: pipeline
 name: API
@@ -69,13 +71,16 @@ steps:
 - name: Build Docker API image
   image: plugins/docker
   settings:
-    repo: axarev/parsr
     context: .
     dockerfile: docker/parsr/Dockerfile
     username: 
       from_secret: registry_user
     password: 
       from_secret: registry_password
+    repo: 
+      from_secret: repo_parsr
+    registry: 
+      from_secret: registry
     build_args:
       DEV_MODE: 'true'
   when:
